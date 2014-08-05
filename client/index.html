@@ -4,17 +4,27 @@
     <meta charset="utf-8">
     <title>chatterbox</title>
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 
     <!-- dependencies -->
     <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <!-- your scripts -->
+    <script src="http://www.parsecdn.com/js/parse-1.0.19.min.js"></script>
     <script src="scripts/config.js"></script>
     <script src="scripts/app.js"></script>
   </head>
   <body>
     <div id="main">
       <h1>chatterbox</h1>
+          <div class="input-group">
+            <input type="text" class="form-control submission-input">
+            <span class="input-group-btn">
+              <button class="btn btn-default submit-button" type="button">Go!</button>
+            </span>
+          </div><!-- /input-group -->
+
       <ul class="messages">
 
       </ul>
