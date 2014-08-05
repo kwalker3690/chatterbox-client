@@ -1,6 +1,8 @@
 // YOUR CODE HERE:
 var app = {};
 app.server = 'https://api.parse.com/1/classes/chatterbox';
+app.roomname = 'lobby';
+app.friends = {};
 
 app.problemCharacters = {
   '&' : '&amp;',
@@ -41,52 +43,88 @@ app.findProblems = function(string){
   }
 };
 
-app.appendMessage = function(data){
-  var storage = '';
-
-  for(var i = 0; i< data.results.length; i++){
-    storage +='<ul class="list-group">' +
-    '<li class="list-group-item">' + app.findProblems(data.results[i].text) + '</li>' +
-    '<li class="list-group-item">' + app.findProblems(data.results[i].username) + '</li>' +
-    '<li class="list-group-item">' + app.findProblems(data.results[i].createdAt) + '</li>' +
-    '<li class="list-group-item">' + app.findProblems(data.results[i].roomname) + '</li>' +
-    '</ul>';
+app.filterMessage = function(data, filter){
+  var result = '';
+  if(filter){
+    for(var j = 0; j < data.results.length; j++){
+      if(data.results[j].roomname === filter){
+        result += app.appendMessage(data.results[j]);
+      }
+    }
+  }else{
+    for(var j = 0; j < data.results.length; j++){
+      result += app.appendMessage(data.results[j]);
+    }
   }
 
-  $('.messages').html(storage);
+  $('.messages').html(result);
 };
 
-app.fetch = function(){
+app.appendMessage = function(dataResult){
+  var storage = '';
+  var message = '';
+  if(app.friends[dataResult.username]){
+    message = 'message';
+  }
+  storage +='<ul class="list-group">' +
+  '<li class="list-group-item ' + message + '">' + app.findProblems(dataResult.text) + '</li>' +
+  '<li class="list-group-item"><a class="user">' + app.findProblems(dataResult.username) + '</a></li>' +
+  '<li class="list-group-item">' + app.findProblems(dataResult.createdAt) + '</li>' +
+  '<li class="list-group-item"><a class="room">' + app.findProblems(dataResult.roomname) + '</a></li>' +
+  '</ul>';
+  return storage;
+};
+
+app.fetch = function(filter){
   $.ajax({
     url: app.server,
     type: 'GET',
     data: 'order=-createdAt',
     dataType: 'json',
     success: function(data){
-      console.log(data)
-      app.appendMessage(data);
+      app.filterMessage(data, filter);
     },
     error: function(){
       console.log('failed :(');
     }
   });
 };
-
+var intervalID;
 app.init = function(){
   app.fetch();
-  setInterval(app.fetch, 5000);
+  intervalID = setInterval(app.fetch, 5000);
 };
 
-app.init();
 
 $(document).ready(function(){
+  app.init();
   var data = {};
   var username = window.location.search.split('=').pop();
   $('.submit-button').on('click', function(){
     data.text = $('.submission-input').val();
     data.username = username;
+    data.roomname = app.roomname;
     app.send(data);
   });
+
+  $('.messages').on('click', '.room', function(){
+    app.roomname = $(this).text();
+    var that = this;
+    app.fetch($(this).text());
+    clearInterval(intervalID);
+    intervalID = setInterval(function(){
+      app.fetch($(that).text());
+    }, 5000);
+  });
+
+  $('.messages').on('click', '.user', function(){
+    var friend = $(this).text();
+    if(!app.friends[friend]){
+      app.friends[friend] = true;
+      $('.friends').append(friend);
+    }
+  });
+
 });
 
 app.send = function(input){
@@ -104,13 +142,6 @@ app.send = function(input){
   });
 
 };
-
-
-
-
-
-
-
 
 
 
