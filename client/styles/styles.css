@@ -1,12 +1,8 @@
 body {
-    background: #eee;
-    text-align: center;
-    padding: 0 25px;
     font-family: arial, sans-serif;
 }
 
 #main {
-    width: 500px;
     margin: auto;
     text-align: left;
     background: white;
@@ -85,4 +81,22 @@ form input[type=text] {
 
 .message {
     font-weight: bold!important;
+}
+
+.messages {
+    margin-top: 20px;
+}
+
+.glyphicon {
+    margin-right: 10px;
+   font-size: 20px;
+}
+
+
+.navbar-brand h4{
+    margin: 0;
+}
+
+.panel h3{
+    margin: 0;
 }

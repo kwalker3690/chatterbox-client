@@ -3,9 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>chatterbox</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-
     <!-- dependencies -->
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -14,21 +11,63 @@
     <script src="http://www.parsecdn.com/js/parse-1.0.19.min.js"></script>
     <script src="scripts/config.js"></script>
     <script src="scripts/app.js"></script>
+
+
+
+
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-cosmo.min.css"> -->
+    <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-darkly.min.css"> -->
+    <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-journal.min.css"> -->
+    <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-slate.min.css"> -->
   </head>
   <body>
-    <div id="main">
-      <h1>chatterbox</h1>
-      <div class="friends"></div>
-          <div class="input-group">
-            <input type="text" class="form-control submission-input">
-            <span class="input-group-btn">
-              <button class="btn btn-default submit-button" type="button">Go!</button>
-            </span>
-          </div><!-- /input-group -->
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-brand">chatterbox</div>
+        <div class="pull-right navbar-brand">
+          <span class="glyphicon glyphicon-user pull-left"></span>
+          <h4 class="pull-right">Kelly Walker</h4>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="friends panel panel-default">
+            <div class="panel-heading">
+              <h3>Your Friends</h3>
+            </div>
+            <ul class=" list-group">
+              <li class="list-group-item">Ben Nelson</li>
+              <li class="list-group-item">Austin Connelly</li>
+              <li class="list-group-item">Superman</li>
+            </ul>
+          </div>
+        </div>
 
-      <ul class="messages">
+        <div class="col-md-8">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Post a Message</h3>
+            </div>
+            <div class="panel-body">
+              <div class="input-group">
+                <input type="text" class="form-control submission-input">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary submit-button" type="button">Post</button>
+                </span>
+              </div>
+            </div>
+          </div>
 
-      </ul>
+          <ul class="messages list-group">
+
+          </ul>
+        </div>
+      </div>
     </div>
   </body>
 </html>

@@ -121,7 +121,7 @@ $(document).ready(function(){
     var friend = $(this).text();
     if(!app.friends[friend]){
       app.friends[friend] = true;
-      $('.friends').append(friend);
+      $('.friends ul').append('<li class="list-group-item">' + friend + '</li>');
     }
   });
 
